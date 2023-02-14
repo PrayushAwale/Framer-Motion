@@ -11,15 +11,18 @@ import {
   InputRightElement,
   VStack,
 } from "@chakra-ui/react";
-const EditForm = ({ setIsEditing }) => {
-  const [value, setValue] = useState("");
+import { motion } from "framer-motion";
+import { AnimatePresence } from "framer-motion";
+const EditForm = ({ setIsEditing, updateTask, taskUpdater }) => {
+  const { value: toUpdateTask, id } = updateTask;
+  const MotionBox = motion(Box);
+  const [value, setValue] = useState(toUpdateTask);
   const handleSubmit = (e) => {
     e.preventDefault();
-    addtask({
-      name: "task",
+    taskUpdater({
+      name: "task1",
       value,
-      id: Date.now(),
-      isCheckd: false,
+      id,
     });
     setValue("");
   };
@@ -33,37 +36,42 @@ const EditForm = ({ setIsEditing }) => {
       zIndex={2}
       onClick={() => setIsEditing((prev) => !prev)}
     >
-      <Box
-        bg={"#2b3343"}
-        p={"3rem 8rem"}
-        borderRadius={"1rem"}
-        boxShadow={"0 4px 4px 0 rgba(255,255,255,0.09)"}
-      >
-        <VStack spacing={"1.5rem"} align={"stretch"} mb={"1rem"} w={"25rem"}>
-          <FormControl>
-            <FormLabel>Edit the Task </FormLabel>
-            <InputGroup>
-              s
-              <Input
-                borderColor={"#fff"}
-                value={value}
-                autoFocus
-                maxLength={50}
-                //   onInput={(e) => setValue(e.target.value)}
-              />
-              <InputRightElement>
-                <Button
-                  borderRadius={"0 0.2rem 0.2rem 0"}
-                  // onClick={handleSubmit}
-                  color={"#2b3343"}
-                >
-                  +
-                </Button>
-              </InputRightElement>
-            </InputGroup>
-          </FormControl>
-        </VStack>
-      </Box>
+      <AnimatePresence>
+        <MotionBox
+          bg={"#2b3343"}
+          p={"3rem 8rem"}
+          borderRadius={"1rem"}
+          boxShadow={"0 4px 4px 0 rgba(255,255,255,0.09)"}
+          //   initial={{ opacity: 0, scale: 0 }}
+          //   animate={{ opacity: 1, scale: 1 }}
+          //   exit={{ opacity: 0, scale: 0 }}
+          //   layout
+        >
+          <VStack spacing={"1.5rem"} align={"stretch"} mb={"1rem"} w={"25rem"}>
+            <FormControl>
+              <FormLabel>Edit the Task </FormLabel>
+              <InputGroup>
+                <Input
+                  borderColor={"#fff"}
+                  value={value}
+                  autoFocus
+                  maxLength={50}
+                  onInput={(e) => setValue(e.target.value)}
+                />
+                <InputRightElement>
+                  <Button
+                    borderRadius={"0 0.2rem 0.2rem 0"}
+                    onClick={handleSubmit}
+                    color={"#2b3343"}
+                  >
+                    +
+                  </Button>
+                </InputRightElement>
+              </InputGroup>
+            </FormControl>
+          </VStack>
+        </MotionBox>
+      </AnimatePresence>
     </Center>
   );
 };

@@ -12,7 +12,14 @@ import {
   VStack,
 } from "@chakra-ui/react";
 import TaskList from "./TaskList";
-const CustomForm = ({ addtask, task, deleteTask, checkTask, setIsEditing }) => {
+const CustomForm = ({
+  addtask,
+  task,
+  deleteTask,
+  checkTask,
+  setIsEditing,
+  updateTaskFunction,
+}) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [value, setValue] = useState("");
   const handleSubmit = (e) => {
@@ -77,6 +84,7 @@ const CustomForm = ({ addtask, task, deleteTask, checkTask, setIsEditing }) => {
         deleteTask={deleteTask}
         checkTask={checkTask}
         setIsEditing={setIsEditing}
+        updateTaskFunction={updateTaskFunction}
       />
     </Box>
   );

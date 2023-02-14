@@ -3,7 +3,13 @@ import { AnimatePresence } from "framer-motion";
 import React from "react";
 import TaskItem from "./TaskItem";
 
-const TaskList = ({ task, deleteTask, checkTask, setIsEditing }) => {
+const TaskList = ({
+  task,
+  deleteTask,
+  checkTask,
+  setIsEditing,
+  updateTaskFunction,
+}) => {
   if (!task.length) {
     return (
       <Text textAlign={"center"} fontSize={"0.8rem"}>
@@ -29,6 +35,7 @@ const TaskList = ({ task, deleteTask, checkTask, setIsEditing }) => {
               deleteTask={deleteTask}
               checkTask={checkTask}
               setIsEditing={setIsEditing}
+              updateTaskFunction={updateTaskFunction}
             />
           ))}
       </AnimatePresence>

@@ -1,10 +1,10 @@
+import { AnimatePresence } from "framer-motion";
 import Body from "./Components/Body";
-import "./app.css";
 function App() {
   return (
-    <>
+    <AnimatePresence>
       <Body />
-    </>
+    </AnimatePresence>
   );
 }
 

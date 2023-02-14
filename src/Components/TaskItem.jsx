@@ -1,11 +1,4 @@
-import {
-  Box,
-  Checkbox,
-  Flex,
-  IconButton,
-  Input,
-  Spacer,
-} from "@chakra-ui/react";
+import { Checkbox, Flex, IconButton, Spacer } from "@chakra-ui/react";
 import React, { memo } from "react";
 import { useState } from "react";
 import { BiEdit } from "react-icons/bi";
@@ -13,7 +6,15 @@ import { FaTrashAlt } from "react-icons/fa";
 import { motion } from "framer-motion";
 
 const TaskItem = memo(
-  ({ value, isCheckd, id, deleteTask, checkTask, setIsEditing }) => {
+  ({
+    value,
+    isCheckd,
+    id,
+    deleteTask,
+    checkTask,
+    setIsEditing,
+    updateTaskFunction,
+  }) => {
     const MotionFlex = motion(Flex);
     const [isChecked, setIsChecked] = useState(isCheckd);
     const handleCheckBox = () => {
@@ -29,17 +30,19 @@ const TaskItem = memo(
         gap={"0.7rem"}
         textDecoration={isChecked ? "line-through" : "none"}
         mb={"1rem"}
-        // initial={false}
-        initial={{ opacity: 0, scale: 1 }}
+        initial={{ opacity: 0, scale: 0 }}
         animate={{ opacity: 1, scale: 1 }}
-        exit={{ opacity: 0, scale: 0 }}
+        exit={{ opacity: 1, scale: 0 }}
         layout
       >
         <Checkbox isChecked={isChecked} onChange={handleCheckBox} />
         {value}
         <Spacer />
         <IconButton
-          onClick={() => setIsEditing((prev) => !prev)}
+          onClick={() => {
+            setIsEditing((prev) => !prev);
+            updateTaskFunction(id);
+          }}
           color={"black"}
           icon={<BiEdit />}
         />
