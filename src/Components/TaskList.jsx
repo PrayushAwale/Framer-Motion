@@ -9,6 +9,7 @@ const TaskList = ({
   checkTask,
   setIsEditing,
   updateTaskFunction,
+  setPrevElement,
 }) => {
   if (!task.length) {
     return (
@@ -36,6 +37,7 @@ const TaskList = ({
               checkTask={checkTask}
               setIsEditing={setIsEditing}
               updateTaskFunction={updateTaskFunction}
+              setPrevElement={setPrevElement}
             />
           ))}
       </AnimatePresence>

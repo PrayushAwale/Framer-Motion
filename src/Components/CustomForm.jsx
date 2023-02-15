@@ -19,6 +19,7 @@ const CustomForm = ({
   checkTask,
   setIsEditing,
   updateTaskFunction,
+  setPrevElement,
 }) => {
   const [errorMessage, setErrorMessage] = useState("");
   const [value, setValue] = useState("");
@@ -85,6 +86,7 @@ const CustomForm = ({
         checkTask={checkTask}
         setIsEditing={setIsEditing}
         updateTaskFunction={updateTaskFunction}
+        setPrevElement={setPrevElement}
       />
     </Box>
   );

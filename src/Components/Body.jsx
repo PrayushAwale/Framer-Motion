@@ -3,11 +3,14 @@ import { Center, useToast } from "@chakra-ui/react";
 import CustomForm from "./CustomForm";
 import EditForm from "./EditForm";
 import { AnimatePresence } from "framer-motion";
+import useLocalStorage from "../hooks/useLocalStorage";
 
 const Body = () => {
   const toast = useToast();
-
-  const [task, setTask] = useState([]);
+  const [prevElement, setPrevElement] = useState(null);
+  prevElement && prevElement.focus();
+  console.log(prevElement);
+  const [task, setTask] = useLocalStorage("React-ToDo", []);
   const [isEditing, setIsEditing] = useState(false);
   const [updateTask, setUpdateTask] = useState(null);
   const addtask = (value) => {
@@ -73,6 +76,7 @@ const Body = () => {
         checkTask={checkTask}
         setIsEditing={setIsEditing}
         updateTaskFunction={updateTaskFunction}
+        setPrevElement={setPrevElement}
       />
     </Center>
   );

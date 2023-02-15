@@ -14,8 +14,10 @@ const TaskItem = memo(
     checkTask,
     setIsEditing,
     updateTaskFunction,
+    setPrevElement,
   }) => {
     const MotionFlex = motion(Flex);
+
     const [isChecked, setIsChecked] = useState(isCheckd);
     const handleCheckBox = () => {
       setIsChecked(!isChecked);
@@ -42,9 +44,11 @@ const TaskItem = memo(
           onClick={() => {
             setIsEditing((prev) => !prev);
             updateTaskFunction(id);
+            setPrevElement(() => document.activeElement);
           }}
           color={"black"}
           icon={<BiEdit />}
+          _focus={{ outline: "2px solid #fff", outlineOffset: "0.2rem" }}
         />
         <IconButton
           onClick={() => deleteTask(id)}
